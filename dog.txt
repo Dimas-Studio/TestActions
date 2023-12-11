@@ -1,2 +1,3 @@
 Собака любит кошек!
-Dog loves cats!!!
+Dog love dogs!!!
+
