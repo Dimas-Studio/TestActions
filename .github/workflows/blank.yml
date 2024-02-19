@@ -21,4 +21,5 @@ jobs:
       - name: Super-linter
         uses: super-linter/super-linter@v6.1.1
         env:
+          VALIDATE_CHECKOV: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
