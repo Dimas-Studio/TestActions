@@ -1,17 +1,24 @@
-name: Auto Assign pull_request
+name: Lint Code Base
 on:
-  pull_request:
-    types: [opened]
+  push: null
+  pull_request: null
 jobs:
-  run:
+  build:
+    name: Lint
     runs-on: ubuntu-latest
+
     permissions:
-      issues: write
-      pull-requests: write
+      contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
     steps:
-    - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        assignees: Andrey-66, PiiosS
-        numOfAssignee: 2
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Super-linter
+        uses: super-linter/super-linter@v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
